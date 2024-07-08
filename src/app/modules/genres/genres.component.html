@@ -4,21 +4,21 @@
   >
     <h2 class="text-2xl font-bold text-white">{{ title }}</h2>
     <app-button
-      [text]="'Agregar Película'"
+      [text]="'Agregar Género'"
       [icon]="
         'M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'
       "
-      (onClick)="onAddMovie()"
+      (onClick)="onAddGenre()"
     >
     </app-button>
   </div>
 
   <app-table
     [headers]="headers"
-    [data]="movies"
-    (viewItem)="onViewMovie($event)"
-    (editItem)="onEditMovie($event)"
-    (deleteItem)="onDeleteMovie($event)"
+    [data]="genres"
+    (viewItem)="onViewGenre($event)"
+    (editItem)="onEditGenre($event)"
+    (deleteItem)="onDeleteGenre($event)"
     [pageSize]="itemsPerPage"
     (pageChange)="onPageChange($event)"
     [totalCount]="totalItems"

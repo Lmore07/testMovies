@@ -1,35 +1,121 @@
-<div
-  class="flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl"
->
-  <table class="w-full text-left table-auto min-w-max">
+<div class="overflow-x-auto shadow-lg rounded-lg">
+  <table class="min-w-full bg-white">
     <thead>
-      <tr>
+      <tr class="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
         @for (header of headers; track header) {
-        <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
-          <p
-            class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"
-          >
-            {{ header }}
-          </p>
+        <th
+          class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider"
+        >
+          {{ header.label }}
         </th>
         }
+        <th
+          class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider"
+        >
+          Opciones
+        </th>
       </tr>
     </thead>
-    <tbody>
-        @for (item of data; track item) {
-        <tr>
-            @for (key of item; track key) {
-            <td class="p-4 border-b border-blue-gray-50">
-                <p
-                class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900"
-                >
-                {{ item[key] }}
-                </p>
-            </td>
-            }
-        </tr>
-          }
-      <tr>
+    <tbody class="bg-white divide-y divide-gray-200">
+      @for (row of data; track row; let i = $index) {
+      <tr
+        class="hover:bg-gray-50 transition-colors duration-200 ease-in-out"
+        [ngClass]="{ 'animate-fade-in': true }"
+        [style.animation-delay.ms]="i * 50"
+      >
+        @for (header of headers; track header) {
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+          <ng-container *ngIf="header.key === 'genres'; else otherContent">
+            <div class="flex flex-wrap space-x-1 gap-2">
+              @for (genre of row[header.key]; track genre) {
+              <span
+                class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold"
+              >
+                {{ genre.nameGenre }}
+              </span>
+              }
+            </div>
+          </ng-container>
+          <ng-template #otherContent>
+            <ng-container
+              *ngIf="header.key === 'releaseDate'; else defaultContent"
+            >
+              <span class="hover:text-blue-600 transition-colors duration-200">
+                {{ row[header.key] | date : "MMMM d, y, h:mm a" }}
+              </span>
+            </ng-container>
+            <ng-template #defaultContent>
+              <span class="hover:text-blue-600 transition-colors duration-200">
+                {{ row[header.key] }}
+              </span>
+            </ng-template>
+          </ng-template>
+        </td>
+        }
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <button
+            (click)="onView(row)"
+            class="text-blue-600 hover:text-blue-900 mr-2 transition-colors duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+              <path
+                fill-rule="evenodd"
+                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <button
+            (click)="onEdit(row)"
+            class="text-green-600 hover:text-green-900 mr-2 transition-colors duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+              />
+            </svg>
+          </button>
+          <button
+            (click)="onDelete(row)"
+            class="text-red-600 hover:text-red-900 transition-colors duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+      }
     </tbody>
   </table>
+
+  <!-- Paginación -->
+  <div class="flex justify-center items-center">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="currentPage"
+      [rows]="pageSize"
+      [totalRecords]="totalCount"
+    />
+  </div>
 </div>

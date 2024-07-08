@@ -1,0 +1,18 @@
+<button
+  (click)="onClick.emit($event)"
+  class="bg-white text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-50 transition-colors duration-200 flex items-center"
+  [ngClass]="{ 'bg-opacity-90 hover:bg-opacity-100': disabled }"
+  [disabled]="disabled"
+>
+  <ng-container *ngIf="icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 mr-2"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path fill-rule="evenodd" [attr.d]="icon" clip-rule="evenodd" />
+    </svg>
+  </ng-container>
+  {{ text }}
+</button>

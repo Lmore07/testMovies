@@ -1,10 +1,10 @@
-export interface IGeneral<T> {
+export interface IGeneralResponse<T> {
   data?: T[];
   message: string;
   pagination?: IPagination;
 }
 
-export interface IError<T> {
+export interface IErrorResponse<T> {
   error: string;
 }
 
@@ -13,4 +13,9 @@ export interface IPagination {
   totalPages: number;
   pageSize: number;
   totalCount: number;
+}
+
+export interface TableHeader {
+  key: string;
+  label: string;
 }

@@ -1,0 +1,51 @@
+<div class="p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-semibold mb-4">Ver información de género</h2>
+  <div class="space-y-4">
+    <form [formGroup]="genreForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700" for="nameGenre"
+          >Título</label
+        >
+        <input
+          id="nameGenre"
+          matInput
+          [disabled]="true"
+          readonly
+          placeholder="Título"
+          formControlName="nameGenre"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700" for="nameGenre"
+          >Películas</label
+        >
+        <div class="flex flex-wrap space-x-1 gap-2">
+          @if (movies.length === 0) {
+          <span
+            class="px-2 py-1 bg-white text-red-800 rounded-full text-xs font-semibold"
+          >
+            No hay películas asociadas
+          </span>
+
+          } @for (movie of movies; track movie) {
+          <span
+            class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold"
+          >
+            {{ movie.titleMovie }}
+          </span>
+          }
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mt-6 flex justify-end space-x-2">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="px-4 py-2 bg-red-600 text-white rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>

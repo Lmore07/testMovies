@@ -1,0 +1,65 @@
+<div class="p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-semibold mb-4">Información de película</h2>
+  <div class="space-y-4">
+    <form [formGroup]="movieForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700" for="titleMovie"
+          >Título</label
+        >
+        <input
+          [disabled]="true"
+          id="titleMovie"
+          matInput
+          placeholder="Título"
+          formControlName="titleMovie"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700" for="releaseDate"
+          >Fecha de lanzamiento</label
+        >
+        <div class="relative mt-1">
+          <input
+            [disabled]="true"
+            id="releaseDate"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="DD/MM/YYYY"
+            formControlName="releaseDate"
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+            class="absolute inset-y-0 right-0 flex items-center pr-3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700" for="genreIds"
+          >Géneros</label
+        >
+        <input
+          [disabled]="true"
+          id="genreIds"
+          matInput
+          placeholder="Géneros"
+          formControlName="genreIds"
+          readonly
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="mt-6 flex justify-end space-x-2">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="px-4 py-2 bg-red-600 text-white rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>

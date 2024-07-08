@@ -1,0 +1,34 @@
+<div class="p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-semibold mb-4">Seleccionar Géneros</h2>
+  <div>
+    <form [formGroup]="genreForm">
+      <div class="space-y-2">
+        <mat-selection-list #genreList formControlName="selectedGenres">
+          <mat-list-option
+            *ngFor="let genre of genres"
+            [value]="genre.genreId"
+            class="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+          >
+            {{ genre.nameGenre }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </form>
+  </div>
+  <div class="mt-6 flex justify-end space-x-2">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="px-4 py-2 bg-red-600 text-white rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="genreForm.value.selectedGenres"
+      class="px-4 py-2 bg-green-600 text-white rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+    >
+      Aceptar
+    </button>
+  </div>
+</div>

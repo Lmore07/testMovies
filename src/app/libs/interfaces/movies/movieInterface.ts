@@ -10,7 +10,7 @@ export interface IMovieResponse {
 export interface IMovieRequest {
   titleMovie: string;
   releaseDate: Date;
-  genres: number[];
+  genreIds: number[];
 }
 
 export interface IMovieGenreResponse {
