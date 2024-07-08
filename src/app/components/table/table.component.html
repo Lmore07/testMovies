@@ -1,0 +1,35 @@
+<div
+  class="flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl"
+>
+  <table class="w-full text-left table-auto min-w-max">
+    <thead>
+      <tr>
+        @for (header of headers; track header) {
+        <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+          <p
+            class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"
+          >
+            {{ header }}
+          </p>
+        </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+        @for (item of data; track item) {
+        <tr>
+            @for (key of item; track key) {
+            <td class="p-4 border-b border-blue-gray-50">
+                <p
+                class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900"
+                >
+                {{ item[key] }}
+                </p>
+            </td>
+            }
+        </tr>
+          }
+      <tr>
+    </tbody>
+  </table>
+</div>
